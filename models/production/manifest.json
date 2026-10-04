@@ -1,0 +1,40 @@
+{
+  "model_path": "models/production/model-best",
+  "promoted_at_utc": "2026-10-04T15:14:44.965335+00:00",
+  "model_sha256": "bd17882d2f6cf23fb452e9fe2530998915609af665b1e7bd5be6f7b2aeda9877",
+  "spacy_version": ">=3.8.8,<3.9.0",
+  "pipeline": [
+    "ner"
+  ],
+  "labels": {
+    "ner": [
+      "ALAT_MUSIK",
+      "BAHASA",
+      "CAGAR_BUDAYA",
+      "DAERAH",
+      "KARYA_BUDAYA",
+      "MAKANAN",
+      "PROVINSI",
+      "RUMAH_ADAT",
+      "SUKU",
+      "TARIAN",
+      "UPACARA"
+    ]
+  },
+  "test_metrics": {
+    "precision": 0.9488636363636364,
+    "recall": 0.907608695652174,
+    "f1": 0.9277777777777778,
+    "tp": 167,
+    "fp": 9,
+    "fn": 17
+  },
+  "test_macro": {
+    "precision": 0.9654512154512155,
+    "recall": 0.8893048128342247,
+    "f1": 0.9130681176530978
+  },
+  "test_examples": 187,
+  "bio_misaligned_records": 0,
+  "source": "notebook-07 model-best; evaluated by notebook-08; promoted by notebook-10"
+}

@@ -1,0 +1,43 @@
+{
+  "lang":"id",
+  "name":"pipeline",
+  "version":"0.0.0",
+  "spacy_version":">=3.8.8,<3.9.0",
+  "description":"",
+  "author":"",
+  "email":"",
+  "url":"",
+  "license":"",
+  "spacy_git_version":"38056e9",
+  "vectors":{
+    "width":0,
+    "vectors":0,
+    "keys":0,
+    "name":null,
+    "mode":"default"
+  },
+  "labels":{
+    "ner":[
+      "ALAT_MUSIK",
+      "BAHASA",
+      "CAGAR_BUDAYA",
+      "DAERAH",
+      "KARYA_BUDAYA",
+      "MAKANAN",
+      "PROVINSI",
+      "RUMAH_ADAT",
+      "SUKU",
+      "TARIAN",
+      "UPACARA"
+    ]
+  },
+  "pipeline":[
+    "ner"
+  ],
+  "components":[
+    "ner"
+  ],
+  "disabled":[
+
+  ]
+}

@@ -1,0 +1,1 @@
+"""NusantaraEdu-NER application package."""

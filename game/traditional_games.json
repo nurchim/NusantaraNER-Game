@@ -1,0 +1,340 @@
+[
+  {
+    "id": "congklak-betawi",
+    "name": "Congklak",
+    "aliases": [
+      "Dakon",
+      "Dhakon",
+      "Congkak"
+    ],
+    "region_context": "Betawi / DKI Jakarta",
+    "category": "strategi",
+    "players": "2 pemain",
+    "summary": "Permainan papan dengan biji-bijian yang menekankan perhitungan, strategi, dan ketekunan.",
+    "ner_text": "Congklak dikenal dalam budaya Betawi di DKI Jakarta. Di Jawa permainan serupa dikenal sebagai Dakon, sedangkan di sejumlah wilayah Sulawesi terdapat nama lain untuk permainan sejenis.",
+    "how_to_play": "Pemain memindahkan biji dari satu lubang ke lubang berikutnya dan berusaha mengumpulkan biji sebanyak mungkin di lubang besar miliknya.",
+    "values": [
+      "strategi",
+      "ketelitian",
+      "kesabaran"
+    ],
+    "source_title": "Congklak Betawi – Direktorat Warisan dan Diplomasi Budaya",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/ditwdb/congklak-betawi/",
+    "allowed_labels": [
+      "SUKU",
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Betawi": "SUKU",
+      "DKI Jakarta": "PROVINSI",
+      "Jawa": "DAERAH",
+      "Sulawesi": "DAERAH"
+    }
+  },
+  {
+    "id": "galasin-betawi",
+    "name": "Galasin / Gobak Sodor",
+    "aliases": [
+      "Galah Asin",
+      "Gobak Sodor"
+    ],
+    "region_context": "Betawi / DKI Jakarta",
+    "category": "kelompok",
+    "players": "2 kelompok",
+    "summary": "Permainan beregu yang menguji kelincahan, strategi, kerja sama, dan kemampuan membaca pergerakan lawan.",
+    "ner_text": "Galasin atau Gobak Sodor merupakan permainan daerah dari DKI Jakarta yang dikenal dalam budaya Betawi. Permainan dilakukan secara berkelompok dengan tugas menjaga dan menerobos garis.",
+    "how_to_play": "Satu kelompok menjaga garis lapangan, sementara kelompok lain berusaha melewati penjaga hingga kembali tanpa tersentuh.",
+    "values": [
+      "kerja sama",
+      "sportivitas",
+      "strategi"
+    ],
+    "source_title": "Galasin Betawi – Direktorat Warisan dan Diplomasi Budaya",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/ditwdb/galasin-betawi/",
+    "allowed_labels": [
+      "SUKU",
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "DKI Jakarta": "PROVINSI",
+      "Betawi": "SUKU"
+    }
+  },
+  {
+    "id": "benteng-musi-rawas",
+    "name": "Benteng-Bentengan",
+    "aliases": [
+      "Bentengan"
+    ],
+    "region_context": "Musi Rawas / Sumatera Selatan",
+    "category": "kelompok",
+    "players": "2 kelompok",
+    "summary": "Permainan kelompok yang memakai titik tertentu sebagai benteng dan menuntut kecepatan serta strategi.",
+    "ner_text": "Benteng-Bentengan merupakan permainan rakyat Musi Rawas di Sumatera Selatan. Permainan ini dimainkan secara berkelompok dan menggunakan tanda tertentu sebagai benteng.",
+    "how_to_play": "Dua kelompok mempertahankan benteng masing-masing sambil mencoba menyentuh atau menguasai benteng lawan sesuai aturan permainan setempat.",
+    "values": [
+      "kewaspadaan",
+      "kedisiplinan",
+      "kebersamaan"
+    ],
+    "source_title": "Benteng-Bentengan Musi Rawas – Direktorat Warisan dan Diplomasi Budaya",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/ditwdb/benteng-bentengan-musi-rawas/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Musi Rawas": "DAERAH",
+      "Sumatera Selatan": "PROVINSI"
+    }
+  },
+  {
+    "id": "egrang",
+    "name": "Egrang",
+    "aliases": [
+      "Jangkungan",
+      "Ingkau",
+      "Tengkak-tengkak",
+      "Batungkau"
+    ],
+    "region_context": "Berbagai daerah Indonesia",
+    "category": "ketangkasan",
+    "players": "individu / lomba",
+    "summary": "Permainan keseimbangan menggunakan pijakan berkaki tinggi yang menuntut keberanian dan koordinasi tubuh.",
+    "ner_text": "Egrang memiliki sebutan berbeda di berbagai daerah. Di Jawa Tengah dikenal sebagai Jangkungan, di Bengkulu disebut Ingkau, di Sumatera Barat dikenal sebagai Tengkak-tengkak, dan di Kalimantan terdapat sebutan Batungkau.",
+    "how_to_play": "Pemain berdiri pada pijakan egrang lalu berjalan atau berlomba menuju garis akhir sambil menjaga keseimbangan.",
+    "values": [
+      "keseimbangan",
+      "keberanian",
+      "ketekunan"
+    ],
+    "source_title": "Egrang, Permainan Rakyat Banyak Manfaat! – Direktorat Kepercayaan dan Tradisi",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/ditkma/egrang-permainan-rakyat-banyak-manfaat/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Jawa Tengah": "PROVINSI",
+      "Bengkulu": "PROVINSI",
+      "Sumatera Barat": "PROVINSI",
+      "Kalimantan": "DAERAH"
+    }
+  },
+  {
+    "id": "longga-padati",
+    "name": "Longga Padati",
+    "aliases": [
+      "Egrang khas Borneo"
+    ],
+    "region_context": "Kalimantan Barat",
+    "category": "ketangkasan",
+    "players": "individu / lomba",
+    "summary": "Variasi egrang yang dikenal di Kalimantan dan berkaitan dengan tradisi masyarakat Dayak Kanyatn.",
+    "ner_text": "Longga Padati dimainkan oleh masyarakat Dayak Kanyatn dalam Ritual Naik Dango di Kalimantan Barat. Permainan ini merupakan variasi egrang dengan lintasan yang dapat memiliki ketinggian berbeda.",
+    "how_to_play": "Pemain menaiki egrang dan melewati lintasan dengan menjaga keseimbangan; pada variasi tertentu lintasan memiliki tingkat ketinggian berbeda.",
+    "values": [
+      "keseimbangan",
+      "ketekunan",
+      "keberanian"
+    ],
+    "source_title": "Longga Padati (Egrang Khas Borneo) – Direktorat Kepercayaan dan Tradisi",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/ditkma/longga-padati-egrang-khas-borneo/",
+    "allowed_labels": [
+      "SUKU",
+      "PROVINSI",
+      "DAERAH",
+      "UPACARA"
+    ],
+    "canonical_entities": {
+      "Dayak Kanyatn": "SUKU",
+      "Naik Dango": "UPACARA",
+      "Kalimantan Barat": "PROVINSI"
+    }
+  },
+  {
+    "id": "cublak-cublak-suweng",
+    "name": "Cublak-Cublak Suweng",
+    "aliases": [],
+    "region_context": "Jawa / kegiatan budaya di Magelang",
+    "category": "bernyanyi",
+    "players": "kelompok",
+    "summary": "Permainan kelompok yang memadukan lagu, tebakan, dan interaksi sosial.",
+    "ner_text": "Cublak-Cublak Suweng diperagakan sebagai permainan tradisional dalam kegiatan budaya di Magelang, Jawa Tengah. Permainan ini dilakukan bersama-sama dan dikenal sebagai salah satu dolanan anak.",
+    "how_to_play": "Anak-anak bermain sambil menyanyikan lagu dan melakukan proses menebak berdasarkan aturan kelompok yang disepakati.",
+    "values": [
+      "interaksi sosial",
+      "konsentrasi",
+      "kebersamaan"
+    ],
+    "source_title": "Dolanan Permainan Tradisional di Car Free Day – Balai Konservasi Borobudur",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/bkborobudur/dolanan-permainan-tradisional-di-car-free-day/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Magelang": "DAERAH",
+      "Jawa Tengah": "PROVINSI"
+    }
+  },
+  {
+    "id": "ular-naga",
+    "name": "Ular Naga",
+    "aliases": [],
+    "region_context": "Permainan kelompok di berbagai daerah",
+    "category": "kelompok",
+    "players": "kelompok",
+    "summary": "Permainan berbaris dan bernyanyi yang mendorong koordinasi serta kebersamaan antar pemain.",
+    "ner_text": "Ular Naga diperagakan bersama permainan tradisional lain dalam kegiatan dolanan di Magelang, Jawa Tengah. Permainan ini dilakukan oleh sekelompok anak secara bersama-sama.",
+    "how_to_play": "Pemain membentuk barisan seperti ular dan bergerak mengikuti pola permainan sambil berinteraksi dengan pemain yang membentuk gerbang.",
+    "values": [
+      "kebersamaan",
+      "koordinasi",
+      "keceriaan"
+    ],
+    "source_title": "Dolanan Permainan Tradisional di Car Free Day – Balai Konservasi Borobudur",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/bkborobudur/dolanan-permainan-tradisional-di-car-free-day/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Magelang": "DAERAH",
+      "Jawa Tengah": "PROVINSI"
+    }
+  },
+  {
+    "id": "bakiak",
+    "name": "Bakiak / Terompah Panjang",
+    "aliases": [
+      "Terompah Panjang"
+    ],
+    "region_context": "Permainan rakyat yang diperlombakan secara nasional",
+    "category": "kelompok",
+    "players": "kelompok kecil",
+    "summary": "Permainan berjalan bersama di atas alas panjang yang membutuhkan ritme dan kekompakan.",
+    "ner_text": "Bakiak dan Terompah Panjang diperkenalkan dalam berbagai kegiatan permainan tradisional di Indonesia. Permainan ini dimainkan secara berkelompok dan menuntut langkah yang kompak.",
+    "how_to_play": "Beberapa pemain berdiri pada alas yang sama lalu bergerak menuju garis akhir dengan menyamakan ritme langkah.",
+    "values": [
+      "kekompakan",
+      "komunikasi",
+      "koordinasi"
+    ],
+    "source_title": "Lomba Permainan Tradisional, Kembalikan Nilai Kebersamaan dan Kesatuan – Direktorat Jenderal Kebudayaan",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/lomba-permainan-tradisional-kembalikan-nilai-kebersamaan-dan-kesatuan/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {}
+  },
+  {
+    "id": "gasing",
+    "name": "Gasing",
+    "aliases": [
+      "Panggal"
+    ],
+    "region_context": "Berbagai daerah Indonesia",
+    "category": "ketangkasan",
+    "players": "individu / kompetisi",
+    "summary": "Permainan memutar benda berbentuk gasing untuk mempertahankan putaran atau berkompetisi sesuai aturan setempat.",
+    "ner_text": "Gasing dikenal sebagai permainan rakyat di berbagai wilayah Indonesia. Koleksi permainan tradisional di Kepulauan Riau juga mencakup gasing, sementara terdapat gasing berukuran besar dari Bangka Tengah.",
+    "how_to_play": "Pemain memutar gasing menggunakan tali atau teknik tertentu dan berusaha mempertahankan putaran selama mungkin atau mengikuti aturan pertandingan setempat.",
+    "values": [
+      "fokus",
+      "ketepatan",
+      "ketekunan"
+    ],
+    "source_title": "Murid SD Kinarya Grasia Tertarik Permainan Tradisional – BPNB Kepri",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/bpkw4/murid-sd-kinarya-grasia-tertarik-permainan-tradisional/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Kepulauan Riau": "PROVINSI",
+      "Bangka Tengah": "DAERAH"
+    }
+  },
+  {
+    "id": "engklek",
+    "name": "Engklek",
+    "aliases": [
+      "Hopscotch"
+    ],
+    "region_context": "Berbagai daerah Indonesia",
+    "category": "ketangkasan",
+    "players": "bergantian",
+    "summary": "Permainan melompat pada pola bidang di tanah yang melatih keseimbangan dan ketepatan gerak.",
+    "ner_text": "Engklek termasuk permainan tradisional yang dipertandingkan dalam kegiatan pelajar di Asahan, Sumatra Utara. Permainan ini menuntut ketepatan langkah dan keseimbangan tubuh.",
+    "how_to_play": "Pemain bergantian melewati pola kotak di tanah dengan melompat sesuai urutan dan aturan permainan.",
+    "values": [
+      "keseimbangan",
+      "ketelitian",
+      "sportivitas"
+    ],
+    "source_title": "Asahan Gelar Lomba Permainan Tradisional – Direktorat Jenderal Kebudayaan",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/asahan-gelar-lomba-permainan-tradisional/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Asahan": "DAERAH",
+      "Sumatra Utara": "PROVINSI"
+    }
+  },
+  {
+    "id": "patok-lele",
+    "name": "Patok Lele",
+    "aliases": [],
+    "region_context": "Kegiatan permainan tradisional di Asahan, Sumatra Utara",
+    "category": "ketangkasan",
+    "players": "individu / kelompok",
+    "summary": "Permainan tradisional berbasis ketangkasan yang masih dipertandingkan dalam kegiatan pelajar di sejumlah daerah.",
+    "ner_text": "Patok Lele dipertandingkan bersama permainan tradisional lain dalam kegiatan pelajar di Kabupaten Asahan, Sumatra Utara. Kegiatan tersebut melibatkan siswa sekolah dasar dan sekolah menengah pertama.",
+    "how_to_play": "Aturan dapat berbeda menurut daerah; permainan umumnya menggunakan alat sederhana dan mengutamakan ketepatan serta keterampilan pemain.",
+    "values": [
+      "ketangkasan",
+      "sportivitas",
+      "fokus"
+    ],
+    "source_title": "Asahan Gelar Lomba Permainan Tradisional – Direktorat Jenderal Kebudayaan",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/asahan-gelar-lomba-permainan-tradisional/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {
+      "Kabupaten Asahan": "DAERAH",
+      "Asahan": "DAERAH",
+      "Sumatra Utara": "PROVINSI"
+    }
+  },
+  {
+    "id": "lari-balok",
+    "name": "Lari Balok",
+    "aliases": [],
+    "region_context": "Kompetisi permainan rakyat tingkat nasional",
+    "category": "ketangkasan",
+    "players": "individu / lomba",
+    "summary": "Permainan lomba yang menuntut koordinasi tubuh, ritme gerak, dan ketangkasan.",
+    "ner_text": "Lari Balok termasuk permainan rakyat yang dikompetisikan dalam Pekan Kebudayaan Nasional bersama Gobak Sodor, Terompah Panjang, dan Egrang. Kegiatan ini menjadi ruang pengenalan permainan rakyat Indonesia.",
+    "how_to_play": "Pemain bergerak menuju garis akhir dengan menggunakan balok sebagai pijakan sesuai aturan perlombaan.",
+    "values": [
+      "koordinasi",
+      "kecepatan",
+      "sportivitas"
+    ],
+    "source_title": "Pekan Kebudayaan Nasional Jadi Ruang Bersama Indonesia Bahagia – Kemdikbud",
+    "source_url": "https://kebudayaan.kemdikbud.go.id/bpcbyogyakarta/pekan-kebudayaan-nasional-jadi-ruang-bersama-indonesia-bahagia/",
+    "allowed_labels": [
+      "PROVINSI",
+      "DAERAH"
+    ],
+    "canonical_entities": {}
+  }
+]
