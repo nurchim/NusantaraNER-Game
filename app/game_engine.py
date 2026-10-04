@@ -38,6 +38,14 @@ DISTRACTOR_BANK = {
     "UPACARA": ["Naik Dango", "Sekaten", "Seren Taun", "Ngaben"],
 }
 
+# Koordinat ini adalah layout arena 2D ilustratif, bukan koordinat geografis.
+# Frontend merendernya sebagai festival/kampung permainan, bukan peta Indonesia.
+ADVENTURE_LAYOUT = [
+    (0.12, 0.22), (0.30, 0.15), (0.50, 0.20), (0.72, 0.15),
+    (0.86, 0.30), (0.72, 0.43), (0.50, 0.38), (0.28, 0.43),
+    (0.14, 0.58), (0.32, 0.72), (0.56, 0.68), (0.80, 0.70),
+]
+
 
 def _read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -80,7 +88,6 @@ def _blocked_game_terms(records: list[dict]) -> set[str]:
         terms.add(item["name"].casefold())
         for alias in item.get("aliases", []):
             terms.add(alias.casefold())
-        # Also block slash-separated display variants.
         terms.update(part.strip().casefold() for part in item["name"].split("/") if part.strip())
     return terms
 
@@ -161,6 +168,49 @@ def _choice_options(correct: str, pool: list[str], rng: random.Random, size: int
     return options
 
 
+def _label_question(game: dict, ent: dict, rng: random.Random) -> dict:
+    options = _choice_options(ent["label"], LABEL_DISTRACTORS, rng)
+    return {
+        "type": "label",
+        "prompt": f'Kategori budaya apakah “{ent["text"]}” pada teks berikut?',
+        "context": game["ner_text"],
+        "options": [{"value": x, "label": LABEL_NAMES.get(x, x)} for x in options],
+        "answer": ent["label"],
+        "explanation": f'{ent["text"]} digunakan sebagai {LABEL_NAMES.get(ent["label"], ent["label"])} pada materi yang telah dikurasi.',
+        "game_id": game["id"],
+        "game_name": game["name"],
+    }
+
+
+def _blank_question(game: dict, ent: dict, rng: random.Random) -> dict:
+    options = _choice_options(ent["text"], DISTRACTOR_BANK.get(ent["label"], []), rng)
+    masked = game["ner_text"][: ent["start"]] + "_____" + game["ner_text"][ent["end"] :]
+    return {
+        "type": "blank",
+        "prompt": "Lengkapi bagian yang hilang berdasarkan konteks budaya.",
+        "context": masked,
+        "options": [{"value": x, "label": x} for x in options],
+        "answer": ent["text"],
+        "explanation": f'Jawaban merupakan entitas {LABEL_NAMES.get(ent["label"], ent["label"])} yang ditemukan model dan lolos kurasi materi.',
+        "game_id": game["id"],
+        "game_name": game["name"],
+    }
+
+
+def _gamefact_question(game: dict, catalog: list[dict], rng: random.Random) -> dict:
+    options = _choice_options(game["name"], [g["name"] for g in catalog], rng)
+    return {
+        "type": "gamefact",
+        "prompt": "Permainan tradisional apa yang sesuai dengan deskripsi ini?",
+        "context": (game.get("summary", "") + " " + game.get("how_to_play", "")).strip(),
+        "options": [{"value": x, "label": x} for x in options],
+        "answer": game["name"],
+        "explanation": f'{game["name"]}: {game.get("region_context", "Indonesia")}. Nilai belajar: {", ".join(game.get("values", []))}.',
+        "game_id": game["id"],
+        "game_name": game["name"],
+    }
+
+
 def _all_entities(catalog: list[dict]) -> list[dict]:
     return [ent for item in catalog for ent in item.get("entities", [])]
 
@@ -168,76 +218,89 @@ def _all_entities(catalog: list[dict]) -> list[dict]:
 def build_session(mode: str, count: int = 5, seed: int | None = None) -> dict:
     rng = random.Random(seed)
     catalog = get_catalog()
-    entities = _all_entities(catalog)
     questions: list[dict] = []
 
     if mode == "label":
         candidates = [(game, ent) for game in catalog for ent in game.get("entities", [])]
         rng.shuffle(candidates)
-        for game, ent in candidates[:count]:
-            options = _choice_options(ent["label"], LABEL_DISTRACTORS, rng)
-            questions.append({
-                "type": "label",
-                "prompt": f'Kategori budaya apakah “{ent["text"]}” pada teks berikut?',
-                "context": game["ner_text"],
-                "options": [{"value": x, "label": LABEL_NAMES.get(x, x)} for x in options],
-                "answer": ent["label"],
-                "explanation": f'{ent["text"]} dikenali model sebagai {LABEL_NAMES.get(ent["label"], ent["label"])}.',
-                "game_id": game["id"],
-                "game_name": game["name"],
-            })
+        questions = [_label_question(game, ent, rng) for game, ent in candidates[:count]]
 
     elif mode == "blank":
         candidates = [(game, ent) for game in catalog for ent in game.get("entities", [])]
         rng.shuffle(candidates)
-        for game, ent in candidates[:count]:
-            curated_pool = DISTRACTOR_BANK.get(ent["label"], [])
-            options = _choice_options(ent["text"], curated_pool, rng)
-            masked = game["ner_text"][: ent["start"]] + "_____" + game["ner_text"][ent["end"] :]
-            questions.append({
-                "type": "blank",
-                "prompt": "Lengkapi bagian yang hilang berdasarkan konteks budaya.",
-                "context": masked,
-                "options": [{"value": x, "label": x} for x in options],
-                "answer": ent["text"],
-                "explanation": f'Jawaban berasal dari entitas {LABEL_NAMES.get(ent["label"], ent["label"])} yang dikenali model.',
-                "game_id": game["id"],
-                "game_name": game["name"],
-            })
+        questions = [_blank_question(game, ent, rng) for game, ent in candidates[:count]]
 
     elif mode == "gamefact":
         shuffled = catalog[:]
         rng.shuffle(shuffled)
-        for game in shuffled[:count]:
-            all_names = [g["name"] for g in catalog]
-            options = _choice_options(game["name"], all_names, rng)
-            questions.append({
-                "type": "gamefact",
-                "prompt": "Permainan tradisional apa yang sesuai dengan deskripsi ini?",
-                "context": game["summary"] + " " + game["how_to_play"],
-                "options": [{"value": x, "label": x} for x in options],
-                "answer": game["name"],
-                "explanation": f'{game["name"]}: {game["region_context"]}. Nilai belajar: {", ".join(game.get("values", []))}.',
-                "game_id": game["id"],
-                "game_name": game["name"],
-            })
+        questions = [_gamefact_question(game, catalog, rng) for game in shuffled[:count]]
 
     elif mode == "mixed":
         modes = ["label", "blank", "gamefact"]
-        per_mode = max(1, count // len(modes))
         combined: list[dict] = []
         for idx, child in enumerate(modes):
-            child_count = per_mode if idx < len(modes) - 1 else max(1, count - len(combined))
+            remaining = max(1, count - len(combined))
+            child_count = max(1, count // len(modes)) if idx < len(modes) - 1 else remaining
             combined.extend(build_session(child, child_count, rng.randint(0, 10_000_000))["questions"])
         rng.shuffle(combined)
         questions = combined[:count]
     else:
         raise ValueError(f"Mode game tidak dikenal: {mode}")
 
+    return {"mode": mode, "count": len(questions), "questions": questions}
+
+
+def adventure_map() -> dict:
+    catalog = get_catalog()
+    nodes = []
+    for idx, game in enumerate(catalog):
+        x, y = ADVENTURE_LAYOUT[idx % len(ADVENTURE_LAYOUT)]
+        nodes.append({
+            "id": game["id"],
+            "name": game["name"],
+            "region_context": game.get("region_context", "Indonesia"),
+            "summary": game.get("summary", ""),
+            "values": game.get("values", []),
+            "entity_count": game.get("entity_count", len(game.get("entities", []))),
+            "x": x,
+            "y": y,
+            "order": idx + 1,
+            "difficulty": 1 + (idx // 4),
+        })
     return {
-        "mode": mode,
-        "count": len(questions),
-        "questions": questions,
+        "title": "Festival Permainan Nusantara",
+        "note": "Arena 2D ini bersifat ilustratif dan bukan peta geografis Indonesia.",
+        "node_count": len(nodes),
+        "nodes": nodes,
+    }
+
+
+def build_adventure_challenge(game_id: str, count: int = 3, seed: int | None = None) -> dict:
+    rng = random.Random(seed)
+    catalog = get_catalog()
+    game = get_game(game_id)
+    candidates: list[dict] = []
+    entities = game.get("entities", [])[:]
+    rng.shuffle(entities)
+    for ent in entities:
+        candidates.append(_label_question(game, ent, rng))
+        if DISTRACTOR_BANK.get(ent["label"]):
+            candidates.append(_blank_question(game, ent, rng))
+    candidates.append(_gamefact_question(game, catalog, rng))
+    rng.shuffle(candidates)
+    selected = candidates[: max(1, min(count, len(candidates)))]
+    return {
+        "game": {
+            "id": game["id"],
+            "name": game["name"],
+            "region_context": game.get("region_context", ""),
+            "summary": game.get("summary", ""),
+            "values": game.get("values", []),
+            "source_title": game.get("source_title", ""),
+            "source_url": game.get("source_url", ""),
+        },
+        "count": len(selected),
+        "questions": selected,
     }
 
 

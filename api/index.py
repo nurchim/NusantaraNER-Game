@@ -4,21 +4,38 @@ import json
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse
 
-from app.game_engine import build_session, custom_text_game, get_game, public_catalog
+from app.game_engine import (
+    adventure_map,
+    build_adventure_challenge,
+    build_session,
+    custom_text_game,
+    get_game,
+    public_catalog,
+)
 from app.inference import get_nlp, predict, quiz_questions
-from app.schemas import CustomGameRequest, GameSessionRequest, PredictRequest, PredictResponse, QuizResponse
+from app.schemas import (
+    AdventureChallengeRequest,
+    CustomGameRequest,
+    GameSessionRequest,
+    PredictRequest,
+    PredictResponse,
+    QuizResponse,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 WEB_INDEX = ROOT / "web" / "index.html"
+WEB_CLASSIC = ROOT / "web" / "classic.html"
 WEB_NER = ROOT / "web" / "ner.html"
 MODEL_MANIFEST = ROOT / "models" / "production" / "manifest.json"
+WEB_CSS = ROOT / "web" / "adventure2d.css"
+WEB_JS = ROOT / "web" / "adventure2d.js"
 
 app = FastAPI(
-    title="NusantaraEdu Games",
-    version="2.0.0",
-    description="Game edukasi permainan tradisional Indonesia berbasis model NusantaraEdu-NER.",
+    title="NusantaraEdu Games 2D",
+    version="3.0.0",
+    description="Petualangan 2D permainan tradisional Indonesia berbasis NusantaraEdu-NER.",
     docs_url="/api/docs",
     redoc_url=None,
 )
@@ -40,9 +57,30 @@ def game_home():
     return _html(WEB_INDEX)
 
 
+@app.get("/classic", response_class=HTMLResponse, include_in_schema=False)
+def classic_home():
+    return _html(WEB_CLASSIC if WEB_CLASSIC.exists() else WEB_INDEX)
+
+
 @app.get("/ner", response_class=HTMLResponse, include_in_schema=False)
 def ner_home():
     return _html(WEB_NER if WEB_NER.exists() else WEB_INDEX)
+
+
+
+
+@app.get("/web/adventure2d.css", include_in_schema=False)
+def adventure_css():
+    if not WEB_CSS.exists():
+        raise HTTPException(status_code=404, detail="Stylesheet 2D tidak ditemukan.")
+    return FileResponse(WEB_CSS, media_type="text/css")
+
+
+@app.get("/web/adventure2d.js", include_in_schema=False)
+def adventure_js():
+    if not WEB_JS.exists():
+        raise HTTPException(status_code=404, detail="Script 2D tidak ditemukan.")
+    return FileResponse(WEB_JS, media_type="application/javascript")
 
 
 @app.get("/api/health")
@@ -56,6 +94,7 @@ def health():
             "pipeline": list(nlp.pipe_names),
             "label_count": len(labels),
             "game_catalog": len(public_catalog()),
+            "adventure_2d": True,
         }
     except Exception as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
@@ -101,6 +140,21 @@ def game_detail(game_id: str):
 def game_session(payload: GameSessionRequest):
     try:
         return build_session(payload.mode, payload.count, payload.seed)
+    except Exception as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.get("/api/game/adventure-map")
+def game_adventure_map():
+    return adventure_map()
+
+
+@app.post("/api/game/adventure/{game_id}")
+def game_adventure(game_id: str, payload: AdventureChallengeRequest):
+    try:
+        return build_adventure_challenge(game_id, payload.count, payload.seed)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="Pos permainan tidak ditemukan.") from exc
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 

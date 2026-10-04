@@ -46,5 +46,10 @@ class GameSessionRequest(BaseModel):
     seed: int | None = None
 
 
+class AdventureChallengeRequest(BaseModel):
+    count: int = Field(default=3, ge=1, le=5)
+    seed: int | None = None
+
+
 class CustomGameRequest(PredictRequest):
     pass
